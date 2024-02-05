@@ -34,6 +34,8 @@ public class TicTacToe
 
     private Square[][] board;
     private boolean isGameOver;
+    // Added window
+    private TicTacToeViewer window;
 
     /**
      * Constructor which initialized the board with BLANKs.
@@ -56,6 +58,9 @@ public class TicTacToe
         this.winner = BLANK;
         this.winIndex = -1;
         this.winDirection = -1;
+
+        // Initialize window
+        window = new TicTacToeViewer(this.board);
     }
 
     /******************** Methods You May Find Helpful ********************/
