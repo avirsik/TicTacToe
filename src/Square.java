@@ -9,6 +9,7 @@ import java.awt.*;
  *
  * @author: Nandhini Namasivayam
  * @version: Jan 2023
+ * Edited by Annie Virsik January 7, 2024
  */
 
 public class Square {
@@ -17,9 +18,10 @@ public class Square {
     private int row;
     private int col;
     private boolean isWinningSquare;
-    private TicTacToeViewer view;
+    public TicTacToeViewer window;
     private Image oImage;
     private Image xImage;
+    public static final int SIDE_LENGTH = 150;
 
     /**
      * Constructor to initialize one Square of the
@@ -27,12 +29,17 @@ public class Square {
      * @param row the row the square is in
      * @param col the column the square is in
      */
-    public Square(int row, int col) {
+    public Square(int row, int col, TicTacToeViewer window) {
         this.row = row;
         this.col = col;
 
         this.marker = TicTacToe.BLANK;
         this.isWinningSquare = false;
+
+        this.window = window;
+
+        oImage = window.getXOs()[0];
+        xImage = window.getXOs()[1];
     }
 
     /******************** Getters and Setters ********************/
@@ -46,6 +53,11 @@ public class Square {
 
     public void setWinningSquare() {
         this.isWinningSquare = true;
+    }
+
+    // Getter for isWinningSquare
+    public boolean getIsWinningSquare() {
+        return this.isWinningSquare;
     }
 
     /**
@@ -65,12 +77,15 @@ public class Square {
 
     // pass reference into square (parameter/instance variable)
     public void draw(Graphics g) {
-        if (marker.equals("o")) {
-            g.drawImage(oImage, row, col, this.view);
+        if (marker.equals(TicTacToe.O_MARKER)) {
+//            g.drawImage(oImage, row, col, SIDE_LENGTH, SIDE_LENGTH, this.window);
+            g.drawImage(oImage, window.START_X + (col * window.SQUARE_SIZE), window.START_Y + (row* window.SQUARE_SIZE), SIDE_LENGTH, SIDE_LENGTH, this.window);
         }
-        else {
-            g.drawImage(xImage, row, col, this.view);
+        else if (marker.equals(TicTacToe.X_MARKER)) {
+//            g.drawImage(xImage, row, col, SIDE_LENGTH, SIDE_LENGTH, this.window);
+            g.drawImage(xImage, window.START_X + (col * window.SQUARE_SIZE), window.START_Y + (row * window.SQUARE_SIZE), SIDE_LENGTH, SIDE_LENGTH, this.window);
         }
     }
+
 }
 

@@ -8,6 +8,7 @@
  *
  * @author: Nandhini Namasivayam
  * @version: Jan 2023
+ *  * Edited by Annie Virsik January 7, 2024
  */
 
 import java.util.Scanner;
@@ -46,9 +47,13 @@ public class TicTacToe
     public TicTacToe() {
         // Initialize Squares in the board
         this.board = new Square[3][3];
+
+        // Initialize window
+        window = new TicTacToeViewer(this);
+
         for(int row = 0; row < this.board.length; row++) {
             for(int col = 0; col< this.board[row].length; col++) {
-                this.board[row][col] = new Square(row, col);
+                this.board[row][col] = new Square(row, col, window);
             }
         }
 
@@ -58,9 +63,6 @@ public class TicTacToe
         this.winner = BLANK;
         this.winIndex = -1;
         this.winDirection = -1;
-
-        // Initialize window
-        window = new TicTacToeViewer(this.board);
     }
 
     /******************** Methods You May Find Helpful ********************/
@@ -115,6 +117,8 @@ public class TicTacToe
         // Loop until there is a winner or no more turns
         while(!this.checkWin() && this.checkTurn()) {
             this.printBoard();
+            // repaints the window
+            window.repaint();
             System.out.println("Enter your Row Pick:" );
             int row = input.nextInt();
             System.out.println("Enter your Col Pick:" );
@@ -127,6 +131,8 @@ public class TicTacToe
         }
 
         this.printBoard();
+        // repaints the window
+        window.repaint();
         this.isGameOver = true;
 
         // Determine if there was a winner
